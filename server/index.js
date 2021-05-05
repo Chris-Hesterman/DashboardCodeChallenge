@@ -18,8 +18,7 @@ app.get('/test', (req, res) => {
   pgdb
     .getTestData()
     .then((results) => {
-      console.log('hello');
-      res.status(200).send(results);
+      res.status(200).send(JSON.stringify(results));
     })
     .catch((err) => {
       res.status(500).send('Server/database error, please try again');

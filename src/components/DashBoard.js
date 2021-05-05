@@ -2,10 +2,18 @@ import { useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 
-const StyledDiv = styled.div`
+const StyledContainer = styled.div`
   background: lightblue;
-  height: 10vh;
-  width: 60%;
+  height: 100%;
+  width: 100%;
+`;
+
+const StyledDiv = styled.div`
+  padding-left: 5rem;
+`;
+
+const StyledTitle = styled.h2`
+  color: black;
 `;
 
 function DashBoard(props) {
@@ -22,14 +30,16 @@ function DashBoard(props) {
     });
   };
   return (
-    <StyledDiv>
-      <p>Dashboard</p>
-      <form onSubmit={onSubmit}>
-        <input type="text" value={value} onChange={onChange}></input>
-        <button type="submit">Submit</button>
-      </form>
-      {!!Object.keys(fetched).length && <h2>{JSON.stringify(fetched)}</h2>}
-    </StyledDiv>
+    <StyledContainer>
+      <StyledDiv>
+        <StyledTitle>Dashboard</StyledTitle>
+        <form onSubmit={onSubmit}>
+          <input type="text" value={value} onChange={onChange}></input>
+          <button type="submit">Submit</button>
+        </form>
+        {!!fetched.length && <h2>{JSON.stringify(fetched[0])}</h2>}
+      </StyledDiv>
+    </StyledContainer>
   );
 }
 
