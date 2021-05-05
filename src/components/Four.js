@@ -7,8 +7,17 @@ const StyledDiv = styled.div`
   width: 100%;
 `;
 
+const StyledTitle = styled.h2`
+  color: black;
+  padding-left: 5rem;
+`;
+
 function Four(props) {
-  return <StyledDiv>Page Four</StyledDiv>;
+  return (
+    <StyledDiv>
+      <StyledTitle>Page Four</StyledTitle>
+    </StyledDiv>
+  );
 }
 
 export default Four;

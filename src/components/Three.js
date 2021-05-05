@@ -7,8 +7,17 @@ const StyledDiv = styled.div`
   width: 100%;
 `;
 
+const StyledTitle = styled.h2`
+  color: black;
+  padding-left: 5rem;
+`;
+
 function Three(props) {
-  return <StyledDiv>Page Three</StyledDiv>;
+  return (
+    <StyledDiv>
+      <StyledTitle>Page Three</StyledTitle>
+    </StyledDiv>
+  );
 }
 
 export default Three;
