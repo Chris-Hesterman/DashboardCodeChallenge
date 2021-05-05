@@ -1,3 +1,5 @@
+GRANT ALL PRIVILEGES ON DATABASE postgres TO postgres;
+
 CREATE TABLE items (
  item_id SERIAL PRIMARY KEY,
  item_name VARCHAR,

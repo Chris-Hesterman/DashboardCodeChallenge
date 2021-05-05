@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const pgdb = require('./models');
 // const router = require('./routes.js');
 
 const app = express();
@@ -14,7 +15,15 @@ app.get('/', (req, res) => {
 });
 
 app.get('/test', (req, res) => {
-  res.status(200).send('You got it');
+  pgdb
+    .getTestData()
+    .then((results) => {
+      console.log('hello');
+      res.status(200).send(results);
+    })
+    .catch((err) => {
+      res.status(500).send('Server/database error, please try again');
+    });
 });
 
 module.exports = app;

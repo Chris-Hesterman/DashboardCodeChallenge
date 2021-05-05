@@ -1,5 +1,5 @@
 const path = require('path');
-const pgdb = require('../../db/models');
+const pgdb = require('../models');
 
 const controllers = {};
 
