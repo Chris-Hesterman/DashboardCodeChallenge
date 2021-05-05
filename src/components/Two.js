@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 const StyledDiv = styled.div`
   background: violet;
-  height: 10vh;
-  width: 60%;
+  height: 100%;
+  width: 100%;
 `;
 
 function Two(props) {

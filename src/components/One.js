@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 const StyledDiv = styled.div`
   background: lime;
-  height: 10vh;
-  width: 60%;
+  height: 100%;
+  width: 100%;
 `;
 
 function One(props) {
