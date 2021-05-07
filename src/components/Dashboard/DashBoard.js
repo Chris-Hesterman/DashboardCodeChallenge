@@ -1,20 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
-import styled from 'styled-components';
-
-const StyledContainer = styled.div`
-  background: lightblue;
-  height: 100%;
-  width: 100%;
-`;
-
-const StyledDiv = styled.div`
-  padding-left: 5rem;
-`;
-
-const StyledTitle = styled.h2`
-  color: black;
-`;
+import { StyledContainer, StyledDiv, StyledTitle } from './DashBoard.Styles';
 
 function DashBoard(props) {
   const [value, setValue] = useState('');
@@ -25,10 +11,16 @@ function DashBoard(props) {
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    axios.get('/test').then((result) => {
-      setFetched(result.data);
-    });
+    axios
+      .get('/test')
+      .then((result) => {
+        setFetched(result.data);
+      })
+      .catch((err) => {
+        throw err;
+      });
   };
+
   return (
     <StyledContainer>
       <StyledDiv>
