@@ -1,7 +1,7 @@
-import { StyledDiv, StyledTitle } from './Three.Styles';
+import { StyledDiv, StyledTitle } from './Page3.Styles';
 import { generateQuestions } from '../../helpers';
 
-const Three = (props) => {
+const Page3 = (props) => {
   const questionsArray = [
     'How would you say butterfly in German?',
     'How about in Spanish?',
@@ -13,10 +13,10 @@ const Three = (props) => {
 
   return (
     <StyledDiv>
-      <StyledTitle>Page Three</StyledTitle>
+      <StyledTitle>Page 3</StyledTitle>
       <div>{questions}</div>
     </StyledDiv>
   );
 };
 
-export default Three;
+export default Page3;

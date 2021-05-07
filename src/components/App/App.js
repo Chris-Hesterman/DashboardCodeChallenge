@@ -1,9 +1,9 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import One from '../One/One';
-import Two from '../Two/Two';
-import Three from '../Three/Three';
-import Four from '../Four/Four';
+import Page1 from '../Page1/Page1';
+import Page2 from '../Page2/Page2';
+import Page3 from '../Page3/Page3';
+import Page4 from '../Page4/Page4';
 import DashBoard from '../Dashboard/DashBoard';
 import {
   StyledNavContainer,
@@ -21,26 +21,26 @@ function App(props) {
         <StyledLink exact to="/">
           Dashboard
         </StyledLink>
-        <StyledLink exact to="/one">
-          Page One
+        <StyledLink exact to="/Page1">
+          Page 1
         </StyledLink>
-        <StyledLink exact to="/two">
-          Page Two
+        <StyledLink exact to="/Page2">
+          Page 2
         </StyledLink>
-        <StyledLink exact to="/three">
-          Page Three
+        <StyledLink exact to="/Page3">
+          Page 3
         </StyledLink>
-        <StyledLink exact to="/four">
-          Page Four
+        <StyledLink exact to="/Page4">
+          Page 4
         </StyledLink>
       </StyledNav>
       <StyledDiv>
         <Switch>
           <Route exact path="/" component={DashBoard} />
-          <Route exact path="/one" component={One} />
-          <Route exact path="/two" component={Two} />
-          <Route exact path="/three" component={Three} />
-          <Route exact path="/four" component={Four} />
+          <Route exact path="/Page1" component={Page1} />
+          <Route exact path="/Page2" component={Page2} />
+          <Route exact path="/Page3" component={Page3} />
+          <Route exact path="/Page4" component={Page4} />
         </Switch>
       </StyledDiv>
     </StyledNavContainer>

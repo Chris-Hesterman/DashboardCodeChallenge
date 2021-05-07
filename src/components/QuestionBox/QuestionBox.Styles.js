@@ -26,5 +26,5 @@ export const StyledP = styled.p`
 export const StyledH2 = styled.h2`
   color: lime;
   margin-left: 2vw;
-  text-shadow: -1px -1px grey, 1px 1px grey, -1px 1px grey, 1px -1px grey;
+  text-shadow: -1px -1px #444, 1px 1px #444, -1px 1px #444, 1px -1px #444;
 `;

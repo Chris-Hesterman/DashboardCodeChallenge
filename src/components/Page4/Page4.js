@@ -1,8 +1,8 @@
 import React from 'react';
 import { generateQuestions } from '../../helpers';
-import { StyledDiv, StyledTitle } from './Four.Styles';
+import { StyledDiv, StyledTitle } from './Page4.Styles';
 
-function Four(props) {
+const Page4 = (props) => {
   const questionsArray = [
     'In german what is your favorite breakfast food?',
     'How about in Spanish?'
@@ -13,10 +13,10 @@ function Four(props) {
 
   return (
     <StyledDiv>
-      <StyledTitle>Page Four</StyledTitle>
+      <StyledTitle>Page 4</StyledTitle>
       <div>{questions}</div>
     </StyledDiv>
   );
-}
+};
 
-export default Four;
+export default Page4;

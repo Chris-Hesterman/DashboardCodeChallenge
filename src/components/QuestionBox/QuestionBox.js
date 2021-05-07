@@ -16,7 +16,7 @@ const QuestionBox = ({ question, answer }) => {
         onChange={onChange}
         placeholder="Type answer here"
       ></input>
-      {!!(inputText === answer) && <StyledH2>Good Job!</StyledH2>}
+      {!!(inputText === answer) && <StyledH2>Correct!</StyledH2>}
     </StyledDiv>
   );
 };

@@ -1,18 +1,15 @@
 import { useState } from 'react';
 import axios from 'axios';
+import PageEditForm from '../PageEditForm/PageEditForm';
 import { StyledContainer, StyledDiv, StyledTitle } from './DashBoard.Styles';
 
 function DashBoard(props) {
   const [value, setValue] = useState('');
   const [fetched, setFetched] = useState({});
 
-  const onChange = (e) => {
-    setValue(e.target.value);
-  };
-  const onSubmit = (e) => {
-    e.preventDefault();
+  const getQuestions = (pageNumber) => {
     axios
-      .get('/test')
+      .get('/Page' + pageNumber)
       .then((result) => {
         setFetched(result.data);
       })
@@ -25,10 +22,14 @@ function DashBoard(props) {
     <StyledContainer>
       <StyledDiv>
         <StyledTitle>Dashboard</StyledTitle>
-        <form onSubmit={onSubmit}>
+
+        <PageEditForm getPage={getQuestions} />
+
+        {/* <form onSubmit={onSubmit}>
           <input type="text" value={value} onChange={onChange}></input>
           <button type="submit">Submit</button>
-        </form>
+        </form> */}
+
         {!!fetched.length && <h2>{JSON.stringify(fetched[0])}</h2>}
       </StyledDiv>
     </StyledContainer>
