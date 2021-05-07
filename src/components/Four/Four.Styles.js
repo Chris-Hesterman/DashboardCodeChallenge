@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledDiv = styled.div`
-  background: red;
+  background: lightgreen;
   height: 100%;
   width: 100%;
 `;
