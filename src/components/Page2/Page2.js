@@ -5,23 +5,23 @@ import {
   StyledTitle,
   StyledDiv,
   StyledUl
-} from './One.Styles';
+} from './Page2.Styles';
 
-function One(props) {
+const Page2 = (props) => {
   const words = ['ham', 'eggs', 'fruit', 'toast'];
-  const answers = ['Obst', 'Toast', 'Eier', 'Schinken'];
+  const answers = ['brindis', 'fruta', 'jamon', 'huevos'];
   const wordBoxes = generateWordBoxes(words);
   const answerBoxes = generateAnswerBoxes(answers);
 
   return (
     <StyledContainer>
-      <StyledTitle>Page One</StyledTitle>
+      <StyledTitle>Page 2</StyledTitle>
       <StyledDiv>
         <StyledUl>{wordBoxes}</StyledUl>
         <StyledUl>{answerBoxes}</StyledUl>
       </StyledDiv>
     </StyledContainer>
   );
-}
+};
 
-export default One;
+export default Page2;

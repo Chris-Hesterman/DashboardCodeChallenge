@@ -1,11 +1,12 @@
-DROP TABLE IF EXISTS `questions`;
+GRANT ALL PRIVILEGES ON DATABASE postgres TO postgres;
 
-CREATE TABLE `questions` (
-  `question_id` INTEGER NOT NULL AUTO_INCREMENT DEFAULT NOT NULL,
-  `question` VARCHAR(255) NULL DEFAULT NULL,
-  `answer` VARCHAR(50) NULL DEFAULT NULL,
-  `type` VARCHAR(10) NOT NULL DEFAULT 'NOT NULL',
-  PRIMARY KEY (`question_id`)
+DROP TABLE IF EXISTS questions;
+
+CREATE TABLE questions (
+  question_id SERIAL PRIMARY KEY,
+  question VARCHAR NOT NULL,
+  answer VARCHAR NOT NULL,
+  type VARCHAR NOT NULL,
 );
 
 -- ---
@@ -13,67 +14,37 @@ CREATE TABLE `questions` (
 --
 -- ---
 
-DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS users;
 
-CREATE TABLE `users` (
-  `user_id` INTEGER NOT NULL AUTO_INCREMENT DEFAULT NOT NULL,
-  `user_name` VARCHAR(25) NOT NULL DEFAULT 'NOT NULL',
-  `password` VARCHAR(10) NOT NULL DEFAULT 'NOT NULL',
-  PRIMARY KEY (`user_id`)
+CREATE TABLE users (
+  user_id SERIAL PRIMARY KEY,
+  user_name VARCHAR NOT NULL,
+  password VARCHAR NOT NULL,
 );
-
--- ---
--- Table 'pages'
---
--- ---
-
-DROP TABLE IF EXISTS `pages`;
-
-CREATE TABLE `pages` (
-  `page_id` INTEGER NOT NULL AUTO_INCREMENT DEFAULT NOT NULL,
-  `page_name` VARCHAR(25) NOT NULL DEFAULT 'NOT NULL',
-  PRIMARY KEY (`page_id`)
-);
-
--- ---
--- Table 'questions_pages'
---
--- ---
-
-DROP TABLE IF EXISTS `questions_pages`;
-
-CREATE TABLE `questions_pages` (
-  `id` INTEGER NOT NULL AUTO_INCREMENT DEFAULT NOT NULL,
-  `page_id` INTEGER NOT NULL DEFAULT NOT NULL,
-  `question_id` INTEGER NOT NULL DEFAULT NOT NULL,
-  PRIMARY KEY (`id`)
-);
-
--- ---
--- Foreign Keys
--- ---
-
-ALTER TABLE `questions_pages` ADD FOREIGN KEY (page_id) REFERENCES `pages` (`page_id`);
-ALTER TABLE `questions_pages` ADD FOREIGN KEY (question_id) REFERENCES `questions` (`question_id`);
-
--- ---
--- Table Properties
--- ---
-
--- ALTER TABLE `questions` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
--- ALTER TABLE `users` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
--- ALTER TABLE `pages` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
--- ALTER TABLE `questions_pages` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ---
 -- Test Data
 -- ---
 
--- INSERT INTO `questions` (`question_id`,`question`,`answer`,`type`) VALUES
--- ('','','','');
--- INSERT INTO `users` (`user_id`,`user_name`,`password`) VALUES
--- ('','','');
--- INSERT INTO `pages` (`page_id`,`page_name`) VALUES
--- ('','');
--- INSERT INTO `questions_pages` (`id`,`page_id`,`question_id`) VALUES
--- ('','','');
+INSERT INTO questions (question,answer,page_id) VALUES
+('What is the word for eggs in Spanish?','huevos', 4);
+('In german what is the word for eggs?','Eier', 4);
+('How would you say butterfly in German?','Schmetterling', 3);
+('How would you say butterfly in Spanish?','mariposa', 3);
+('How would you say refrigerator German?','Kühlschrank', 3);
+('ham','jamon', 2);
+('eggs','heuvos', 2);
+('fruit','fruta', 2);
+('toast','brindis', 2);
+('ham','Schinken', 2);
+('eggs','Eier', 2);
+('fruit','Obst', 2);
+('toast','Toast', 2);
+
+
+INSERT INTO users (user_name,password) VALUES
+('Tom','burntToast53');
+('Larry','octopus9000');
+('Ralph','stethescope22');
+
+

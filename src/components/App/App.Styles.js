@@ -42,6 +42,6 @@ export const StyledLink = styled(NavLink)`
     cursor: pointer;
   }
   &.active {
-    color: lime;
+    color: whitesmoke;
   }
 `;
