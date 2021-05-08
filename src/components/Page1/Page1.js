@@ -1,26 +1,15 @@
-import React from 'react';
-import { generateWordBoxes, generateAnswerBoxes } from '../../helpers';
-import {
-  StyledContainer,
-  StyledTitle,
-  StyledDiv,
-  StyledUl
-} from './Page1.Styles';
+import WordMatch from '../WordMatch/WordMatch';
 
-const Page1 = (props) => {
-  const words = ['ham', 'eggs', 'fruit', 'toast'];
-  const answers = ['Obst', 'Toast', 'Eier', 'Schinken'];
-  const wordBoxes = generateWordBoxes(words);
-  const answerBoxes = generateAnswerBoxes(answers);
+const Page1 = ({ questions }) => {
+  const words = questions.map((question) => {
+    return question.question;
+  });
+  const answers = questions.map((question) => {
+    return question.answer;
+  });
 
   return (
-    <StyledContainer>
-      <StyledTitle>Page 1</StyledTitle>
-      <StyledDiv>
-        <StyledUl>{wordBoxes}</StyledUl>
-        <StyledUl>{answerBoxes}</StyledUl>
-      </StyledDiv>
-    </StyledContainer>
+    <WordMatch words={words} answers={answers} page={questions[0].page_id} />
   );
 };
 

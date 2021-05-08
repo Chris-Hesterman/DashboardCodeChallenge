@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import axios from 'axios';
 
 const PageEditForm = ({ getPage }) => {
   const [value, setValue] = useState('');

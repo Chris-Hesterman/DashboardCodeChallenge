@@ -2,15 +2,14 @@ import axios from 'axios';
 import WordBox from './components/WordBox/WordBox';
 import QuestionBox from './components/QuestionBox/QuestionBox';
 
-export const fetchData = () => {
-  return axios
-    .get('/test')
-    .then((result) => {
-      return result.data;
-    })
-    .catch((err) => {
-      throw err;
-    });
+export const fetchData = async (number) => {
+  axios.defaults.baseURL = 'http://127.0.0.1:3001';
+  try {
+    const response = await axios.get('/page/' + number);
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const generateWordBoxes = (array) => {

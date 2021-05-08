@@ -1,21 +1,19 @@
-import React from 'react';
-import { generateQuestions } from '../../helpers';
-import { StyledDiv, StyledTitle } from './Page4.Styles';
+import QuestionList from '../QuestionList/QuestionList';
 
-const Page4 = (props) => {
-  const questionsArray = [
-    'In german what is your favorite breakfast food?',
-    'How about in Spanish?'
-  ];
-  const answersArray = ['Eier', 'huevos'];
-
-  const questions = generateQuestions(questionsArray, answersArray);
+const Page4 = ({ questions }) => {
+  const questionsArray = questions.map((question) => {
+    return question.question;
+  });
+  const answers = questions.map((question) => {
+    return question.answer;
+  });
 
   return (
-    <StyledDiv>
-      <StyledTitle>Page 4</StyledTitle>
-      <div>{questions}</div>
-    </StyledDiv>
+    <QuestionList
+      questions={questionsArray}
+      answers={answers}
+      page={questions[0].page_id}
+    />
   );
 };
 
