@@ -35,7 +35,7 @@ app.get('/page/:number', (req, res) => {
         if (acc[page - 1]) {
           acc[page - 1].push(result);
         } else {
-          acc[page - 1] = [result];
+          acc[page - 1] = Array(result);
         }
         return acc;
       }, []);
