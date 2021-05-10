@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { updateData } from '../../helpers';
 
 const StyledContainer = styled.div`
   margin: 0;
@@ -20,8 +21,10 @@ const QuestionEditForm = ({
       setQuestion(e.target.value);
     } else setAnswer(e.target.value);
   };
+
   const onSubmit = (e) => {
     e.preventDefault();
+    updateData(questionNumber, question, answer, 'question');
   };
 
   return (

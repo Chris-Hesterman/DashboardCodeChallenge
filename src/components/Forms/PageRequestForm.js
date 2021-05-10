@@ -13,7 +13,7 @@ const PageRequestForm = () => {
 
   const getQuestions = async (page_id) => {
     try {
-      const result = await fetchData(page_id, 'questions');
+      const result = await fetchData(page_id, 'question');
       let fetchedData = result.data.filter((page) => {
         return page !== null;
       });
@@ -32,19 +32,22 @@ const PageRequestForm = () => {
     getQuestions(value);
   };
 
-  const editForms = fetched.length
-    ? fetched[0].map((entry) => {
-        return (
-          <QuestionEditForm
-            questionString={entry.question}
-            answerString={entry.answer}
-            pageNumber={entry.page_id}
-            questionNumber={entry.question_id}
-            key={entry.answer}
-          />
-        );
-      })
-    : null;
+  const editForms =
+    fetched.length !== 0
+      ? fetched[0]
+          .filter((item) => item !== null)
+          .map((entry) => {
+            return (
+              <QuestionEditForm
+                questionString={entry.question}
+                answerString={entry.answer}
+                pageNumber={entry.page_id}
+                questionNumber={entry.question_id}
+                key={entry.answer}
+              />
+            );
+          })
+      : null;
 
   return !fetched.length ? (
     <form onSubmit={onSubmit}>

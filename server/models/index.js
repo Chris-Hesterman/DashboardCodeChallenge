@@ -1,7 +1,7 @@
 const pool = require('../database/index.js');
 
-const getQuestionsStr = `SELECT * FROM questions`;
-const getQuestionsAllStr = `SELECT * FROM questions WHERE page_id = $1`;
+const getQuestionsAllStr = `SELECT * FROM questions`;
+const getQuestionsStr = `SELECT * FROM questions WHERE page_id = $1`;
 const getUserStr = `SELECT * FROM users WHERE user_id = $1`;
 const getUsersAllStr = `SELECT * FROM users`;
 const updateQuestionStr = `UPDATE questions SET question = $1, answer = $2 WHERE question_id = $3 RETURNING question_id`;
@@ -13,10 +13,10 @@ const deleteUserStr = `DELETE FROM users WHERE user_id = $1 RETURNING user_id`;
 
 const getData = (numberId, type) => {
   let queryString;
-
-  if (type === 'question') {
-    queryString = numberId = '[]' ? getQuestionsAllStr : getQuestionsStr;
-
+  console.log(numberId);
+  if (numberId === '[]') {
+    queryString = type === 'question' ? getQuestionsAllStr : getUsersAllStr;
+    console.log(queryString);
     return pool
       .query(queryString)
       .then((data) => {
@@ -25,18 +25,18 @@ const getData = (numberId, type) => {
       .catch((err) => {
         throw err;
       });
-  } else {
-    queryString = numberId = '[]' ? getUsersAllStr : getUserStr;
-
-    return pool
-      .query(queryString, [numberId])
-      .then((data) => {
-        return data.rows;
-      })
-      .catch((err) => {
-        throw err;
-      });
   }
+
+  queryString = type === 'question' ? getQuestionsStr : getUserStr;
+
+  return pool
+    .query(queryString, [numberId])
+    .then((data) => {
+      return data.rows;
+    })
+    .catch((err) => {
+      throw err;
+    });
 };
 
 const updateData = (value1, value2, numberId, type) => {

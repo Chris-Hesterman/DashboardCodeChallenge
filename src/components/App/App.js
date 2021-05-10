@@ -19,7 +19,8 @@ function App(props) {
 
   const getQuestions = async (pageNumber) => {
     try {
-      const result = await fetchData(pageNumber, 'questions');
+      const result = await fetchData(pageNumber, 'question');
+
       setFetched(result.data);
     } catch (err) {
       console.log(err);
