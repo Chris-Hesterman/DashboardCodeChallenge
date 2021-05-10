@@ -6,7 +6,6 @@ function DashBoard(props) {
     <StyledContainer>
       <StyledDiv>
         <StyledTitle>Dashboard</StyledTitle>
-
         <PageRequestForm />
       </StyledDiv>
     </StyledContainer>

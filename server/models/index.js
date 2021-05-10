@@ -1,9 +1,24 @@
 const pool = require('../database/index.js');
 
-const getPageData = (page_id) => {
-  if ((page_id = '[]')) {
+const getQuestionsStr = `SELECT * FROM questions`;
+const getQuestionsAllStr = `SELECT * FROM questions WHERE page_id = $1`;
+const getUserStr = `SELECT * FROM users WHERE user_id = $1`;
+const getUsersAllStr = `SELECT * FROM users`;
+const updateQuestionStr = `UPDATE questions SET question = $1, answer = $2 WHERE question_id = $3 RETURNING question_id`;
+const updateUserStr = `UPDATE users SET username = $1, password = $2 WHERE user_id = $3 RETURNING user_id`;
+const addQuestionStr = `INSERT INTO questions (question, answer, page_id) VALUES($1, $2, $3) RETURNING question_id`;
+const addUserStr = `INSERT INTO users (username, password) VALUES($1, $2 RETURNING user_id`;
+const deleteQuestionStr = `DELETE FROM questions WHERE question_id = $1 RETURNING question_id`;
+const deleteUserStr = `DELETE FROM users WHERE user_id = $1 RETURNING user_id`;
+
+const getData = (numberId, type) => {
+  let queryString;
+
+  if (type === 'question') {
+    queryString = numberId = '[]' ? getQuestionsAllStr : getQuestionsStr;
+
     return pool
-      .query(`SELECT * FROM questions`)
+      .query(queryString)
       .then((data) => {
         return data.rows;
       })
@@ -11,8 +26,10 @@ const getPageData = (page_id) => {
         throw err;
       });
   } else {
+    queryString = numberId = '[]' ? getUsersAllStr : getUserStr;
+
     return pool
-      .query(`SELECT * FROM questions WHERE page_id = $1`, [page_id])
+      .query(queryString, [numberId])
       .then((data) => {
         return data.rows;
       })
@@ -22,22 +39,32 @@ const getPageData = (page_id) => {
   }
 };
 
-const updateQuestion = (question, answer, question_id) => {
-  const queryString = `UPDATE questions SET question = $1, answer = $2 answer WHERE question_id = $3 RETURNING question_id`;
+const updateData = (value1, value2, numberId, type) => {
+  let queryString = updateUserStr;
+
+  if (type === 'question') {
+    queryString = updateQuestionStr;
+  }
 
   return pool
-    .query(queryString, [question, answer, question_id])
+    .query(queryString, [value1, value2, numberId])
     .then((result) => {
       return result.rows[0];
     })
     .catch((err) => console.log(err));
 };
 
-const addQuestion = (question, answer, page_id) => {
-  const queryString = `INSERT INTO questions (question, answer, page_id) VALUES($1, $2, $3) RETURNING question_id`;
+const addData = (field1, field2, numberId, type) => {
+  let queryString = addUserStr;
+  let paramsArray = [field1, field2];
+
+  if (type === 'question') {
+    queryString = addQuestionStr;
+    paramsArray = [field1, field2, numberId];
+  }
 
   return pool
-    .query(queryString, [question, answer, page_id])
+    .query(queryString, paramsArray)
     .then((result) => {
       return result;
     })
@@ -46,12 +73,17 @@ const addQuestion = (question, answer, page_id) => {
     });
 };
 
-const deleteQuestion = (question_id) => {
-  const queryString = `DELETE FROM questions WHERE question_id = $1 RETURNING question_id`;
-  return pool.query();
+const deleteData = (numberId, type) => {
+  let queryString = deleteUserStr;
+
+  if (type === 'question') {
+    queryString = deleteQuestionStr;
+  }
+
+  return pool.query(queryString, [numberId]);
 };
 
-module.exports.getPageData = getPageData;
-module.exports.addQuestion = addQuestion;
-module.exports.updateQuestion = updateQuestion;
-module.exports.deleteQuestion = deleteQuestion;
+module.exports.getData = getData;
+module.exports.addData = addData;
+module.exports.updateData = updateData;
+module.exports.deleteData = deleteData;

@@ -2,10 +2,14 @@ import axios from 'axios';
 import WordBox from './components/WordBox/WordBox';
 import QuestionBox from './components/QuestionBox/QuestionBox';
 
-export const fetchData = async (page_id) => {
+export const fetchData = async (req_id, type) => {
   axios.defaults.baseURL = 'http://127.0.0.1:3001';
+
   try {
-    const response = await axios.get('/questions/' + page_id);
+    const response =
+      type === 'questions'
+        ? await axios.get('/questions/' + req_id)
+        : await axios.get('/users/' + req_id);
     return response;
   } catch (err) {
     console.log(err);

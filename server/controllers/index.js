@@ -10,8 +10,9 @@ const controllers = {
   questions: {
     get: (req, res) => {
       const { page_id } = req.params;
+
       pgdb
-        .getPageData(page_id)
+        .getData(page_id, 'question')
         .then((results) => {
           console.log(results);
           results = results.reduce((acc, result) => {
@@ -38,7 +39,7 @@ const controllers = {
       const { body } = req.body;
 
       pgdb
-        .updateQuestion(body.question, body.answer, question_id)
+        .updateData(body.question, body.answer, question_id, 'question')
         .then((results) => {
           console.log(`question ${results.question_id} was updated`);
           res.set('Access-Control-Allow-Origin', '*');
@@ -53,7 +54,7 @@ const controllers = {
       const { body } = req.body;
 
       pgdb
-        .addQuestion(question, answer, page_id)
+        .addData(body.question, body.answer, page_id, 'question')
         .then((result) => {
           res.set('Access-Control-Allow-Origin', '*');
           res.status(202).send('question was added to database');
@@ -67,10 +68,81 @@ const controllers = {
       const { question_id } = req.params;
 
       pgdb
-        .deleteQuestion(question_id)
+        .deleteData(question_id, 'question')
         .then((result) => {
           res.set('Access-Control-Allow-Origin', '*');
           res.status(200).send(`Question ${question_id} was deleted`);
+        })
+        .catch((err) => {
+          console.log(err);
+          res.status(500).send('There was a problem');
+        });
+    }
+  },
+  users: {
+    get: (req, res) => {
+      const { user_id } = req.params;
+      pgdb
+        .getData(user_id, 'user')
+        .then((results) => {
+          console.log(results);
+          results = results.reduce((acc, result) => {
+            const user = result.user_id;
+            if (acc[user]) {
+              acc[user].push(result);
+            } else {
+              acc[user] = Array(result);
+            }
+            return acc;
+          }, []);
+          if (results.length === 1) {
+            results = results[0];
+          }
+          res.set('Access-Control-Allow-Origin', '*');
+          res.status(200).send(results);
+        })
+        .catch((err) => {
+          res.status(500).send('Server/database error, please try again');
+        });
+    },
+    put: (req, res) => {
+      const { user_id } = req.params;
+      const { body } = req.body;
+
+      pgdb
+        .updateData(body.username, body.password, user_id, 'user')
+        .then((results) => {
+          console.log(`user ${results.user_id} was updated`);
+          res.set('Access-Control-Allow-Origin', '*');
+          res.status(200).send(`user ${results.user_id} was updated`);
+        })
+        .catch((err) => {
+          res.status(500).send(err);
+        });
+    },
+    post: (req, res) => {
+      const { user_id } = req.params;
+      const { body } = req.body;
+
+      pgdb
+        .addData(body.username, body.password, user_id, 'user')
+        .then((result) => {
+          res.set('Access-Control-Allow-Origin', '*');
+          res.status(202).send('user was added to database');
+        })
+        .catch((err) => {
+          console.log(err);
+          res.status(500).send(err);
+        });
+    },
+    delete: (req, res) => {
+      const { user_id } = req.params;
+
+      pgdb
+        .deleteData(user_id, 'user')
+        .then((result) => {
+          res.set('Access-Control-Allow-Origin', '*');
+          res.status(200).send(`User ${user_id} was deleted`);
         })
         .catch((err) => {
           console.log(err);
