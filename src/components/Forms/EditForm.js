@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 
+const StyledContainer = styled.div`
+  margin: 0;
+  padding: 0;
+`;
+const StyledDiv = styled.div``;
 const EditForm = ({
   questionString,
   answerString,
@@ -19,33 +25,35 @@ const EditForm = ({
   };
 
   return (
-    <div>
+    <StyledContainer>
       <form onSubmit={onSubmit}>
         <h3>
           Page #: {pageNumber} Question ID: {questionNumber}
         </h3>
-        <label htmlFor="question">question: </label>
-        <input
-          type="text"
-          name="question"
-          value={question}
-          onChange={onChange}
-          id="question"
-        ></input>
+        <StyledDiv>
+          <label htmlFor="question">question: </label>
+          <input
+            type="text"
+            name="question"
+            value={question}
+            onChange={onChange}
+            id="question"
+            size="60"
+          ></input>
 
-        <label htmlFor="answer">answer: </label>
-        <input
-          type="text"
-          name="answer"
-          value={answer}
-          onChange={onChange}
-          id="answer"
-        ></input>
-
+          <label htmlFor="answer">answer: </label>
+          <input
+            type="text"
+            name="answer"
+            value={answer}
+            onChange={onChange}
+            id="answer"
+          ></input>
+        </StyledDiv>
         <button type="submit">Submit</button>
       </form>
       <br></br>
-    </div>
+    </StyledContainer>
   );
 };
 
