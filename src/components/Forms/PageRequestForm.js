@@ -2,7 +2,11 @@ import { useState } from 'react';
 import EditForm from '../Forms/EditForm';
 import { fetchData } from '../../helpers';
 import { NavLink } from 'react-router-dom';
+import styled from 'styled-components';
 
+const StyledUl = styled.ul`
+  padding-left: 0;
+`;
 const PageRequestForm = ({ pageData }) => {
   const [value, setValue] = useState('');
   const [data, setData] = useState('');
@@ -56,7 +60,7 @@ const PageRequestForm = ({ pageData }) => {
     </form>
   ) : (
     <div>
-      <ul>{editForms}</ul>
+      <StyledUl>{editForms}</StyledUl>
       <NavLink exact to={`/Page${value}`}>
         Finished Editing
       </NavLink>
