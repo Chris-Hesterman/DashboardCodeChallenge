@@ -1,13 +1,14 @@
 import { useState } from 'react';
-import QuestionEditForm from '../Forms/QuestionEditForm';
-import { fetchData } from '../../helpers';
-import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-routeer-dom';
 import styled from 'styled-components';
+import { UserEditForm } from './UserEditForm';
+import { fetchData } from '../../helpers';
 
 const StyledUl = styled.ul`
   padding-left: 0;
 `;
-const PageRequestForm = () => {
+
+const UserRequestForm = ({ user_id }) => {
   const [value, setValue] = useState('');
   const [fetched, setFetched] = useState('');
 
@@ -34,26 +35,26 @@ const PageRequestForm = () => {
 
   const editForms = fetched.length
     ? fetched[0].map((entry) => {
+        console.log(entry);
         return (
-          <QuestionEditForm
-            questionString={entry.question}
-            answerString={entry.answer}
-            pageNumber={entry.page_id}
-            questionNumber={entry.question_id}
-            key={entry.answer}
+          <UserEditForm
+            usernameString={entry.username}
+            passwordString={entry.password}
+            pageNumber={entry.user_id}
+            key={entry.username + entry.user_id}
           />
         );
       })
     : null;
 
-  return !fetched.length ? (
+  return fetched.length ? (
     <form onSubmit={onSubmit}>
       <input
         type="number"
         value={value}
         onChange={onChange}
-        id="page"
-        placeholder="page number"
+        id="user"
+        placeholder="user_id"
       ></input>
       <button type="submit">Submit</button>
     </form>
@@ -67,4 +68,4 @@ const PageRequestForm = () => {
   );
 };
 
-export default PageRequestForm;
+export default UserRequestForm;
