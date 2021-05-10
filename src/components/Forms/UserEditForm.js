@@ -1,6 +1,7 @@
-import React from 'react';
+import { useState } from 'react';
+import { updateData } from '../../helpers';
 
-const UserEditForm = ({ username, password, user_id }) => {
+const UserEditForm = ({ usernameStr, pwdStr, user_id }) => {
   const [username, setUsername] = useState(usernameStr);
   const [pwd, setPwd] = useState(pwdStr);
 
