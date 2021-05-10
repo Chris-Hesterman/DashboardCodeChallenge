@@ -27,7 +27,6 @@ const controllers = {
           if (results.length === 1) {
             results = results[0];
           }
-          res.set('Access-Control-Allow-Origin', '*');
           res.status(200).send(results);
         })
         .catch((err) => {
@@ -42,7 +41,6 @@ const controllers = {
         .updateData(body.question, body.answer, question_id, 'question')
         .then((results) => {
           console.log(`question ${results.question_id} was updated`);
-          res.set('Access-Control-Allow-Origin', '*');
           res.status(200).send(`question ${results.question_id} was updated`);
         })
         .catch((err) => {
@@ -56,7 +54,6 @@ const controllers = {
       pgdb
         .addData(body.question, body.answer, page_id, 'question')
         .then((result) => {
-          res.set('Access-Control-Allow-Origin', '*');
           res.status(202).send('question was added to database');
         })
         .catch((err) => {
@@ -70,7 +67,6 @@ const controllers = {
       pgdb
         .deleteData(question_id, 'question')
         .then((result) => {
-          res.set('Access-Control-Allow-Origin', '*');
           res.status(200).send(`Question ${question_id} was deleted`);
         })
         .catch((err) => {
@@ -98,7 +94,6 @@ const controllers = {
           if (results.length === 1) {
             results = results[0];
           }
-          res.set('Access-Control-Allow-Origin', '*');
           res.status(200).send(results);
         })
         .catch((err) => {
@@ -113,7 +108,6 @@ const controllers = {
         .updateData(body.username, body.password, user_id, 'user')
         .then((results) => {
           console.log(`user ${results.user_id} was updated`);
-          res.set('Access-Control-Allow-Origin', '*');
           res.status(200).send(`user ${results.user_id} was updated`);
         })
         .catch((err) => {
@@ -121,13 +115,11 @@ const controllers = {
         });
     },
     post: (req, res) => {
-      const { user_id } = req.params;
       const { body } = req.body;
 
       pgdb
-        .addData(body.username, body.password, user_id, 'user')
+        .addData(body.username, body.password, 'user')
         .then((result) => {
-          res.set('Access-Control-Allow-Origin', '*');
           res.status(202).send('user was added to database');
         })
         .catch((err) => {
@@ -141,7 +133,6 @@ const controllers = {
       pgdb
         .deleteData(user_id, 'user')
         .then((result) => {
-          res.set('Access-Control-Allow-Origin', '*');
           res.status(200).send(`User ${user_id} was deleted`);
         })
         .catch((err) => {
