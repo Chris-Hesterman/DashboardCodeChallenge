@@ -13,10 +13,10 @@ const deleteUserStr = `DELETE FROM users WHERE user_id = $1 RETURNING user_id`;
 
 const getData = (numberId, type) => {
   let queryString;
-  console.log(numberId);
+
   if (numberId === '[]') {
     queryString = type === 'question' ? getQuestionsAllStr : getUsersAllStr;
-    console.log(queryString);
+
     return pool
       .query(queryString)
       .then((data) => {
@@ -25,18 +25,18 @@ const getData = (numberId, type) => {
       .catch((err) => {
         throw err;
       });
+  } else {
+    queryString = type === 'question' ? getQuestionsStr : getUserStr;
+
+    return pool
+      .query(queryString, [numberId])
+      .then((data) => {
+        return data.rows;
+      })
+      .catch((err) => {
+        throw err;
+      });
   }
-
-  queryString = type === 'question' ? getQuestionsStr : getUserStr;
-
-  return pool
-    .query(queryString, [numberId])
-    .then((data) => {
-      return data.rows;
-    })
-    .catch((err) => {
-      throw err;
-    });
 };
 
 const updateData = (value1, value2, numberId, type) => {
