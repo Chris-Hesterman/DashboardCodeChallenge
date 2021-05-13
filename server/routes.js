@@ -1,8 +1,6 @@
 const router = require('express').Router();
 const controllers = require('./controllers');
 
-router.get('/', controllers.root.get);
-
 router.get('/questions/:page_id', controllers.questions.get);
 
 router.put('/questions/:question_id', controllers.questions.put);
