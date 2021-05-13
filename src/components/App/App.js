@@ -53,7 +53,11 @@ function App(props) {
       </StyledNav>
       <StyledDiv>
         <Switch>
-          <Route exact path="/" component={DashBoard} />
+          <Route
+            exact
+            path="/"
+            render={() => <DashBoard refreshQuestions={getQuestions} />}
+          />
           <Route
             exact
             path="/Page1"

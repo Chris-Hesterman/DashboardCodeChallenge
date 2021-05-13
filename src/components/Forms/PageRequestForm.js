@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import QuestionEditForm from '../Forms/QuestionEditForm';
 import { fetchData } from '../../helpers';
-import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledUl = styled.ul`
   padding-left: 0;
 `;
-const PageRequestForm = () => {
+
+const PageRequestForm = ({ refreshQuestions }) => {
   const [value, setValue] = useState('');
   const [fetched, setFetched] = useState('');
 
@@ -17,14 +17,19 @@ const PageRequestForm = () => {
       let fetchedData = result.data.filter((page) => {
         return page !== null;
       });
+      console.log(fetchedData);
       setFetched(fetchedData);
     } catch (err) {
       console.log(err);
     }
   };
 
-  const onChange = (e) => {
+  const handleChange = (e) => {
     setValue(e.target.value);
+  };
+
+  const handleClick = (e) => {
+    window.location.replace(window.location.href);
   };
 
   const onSubmit = (e) => {
@@ -33,8 +38,8 @@ const PageRequestForm = () => {
   };
 
   const editForms =
-    fetched.length !== 0
-      ? fetched[0]
+    Array.isArray(fetched) && fetched.length !== 0
+      ? fetched
           .filter((item) => item !== null)
           .map((entry) => {
             return (
@@ -54,7 +59,7 @@ const PageRequestForm = () => {
       <input
         type="number"
         value={value}
-        onChange={onChange}
+        onChange={handleChange}
         id="page"
         placeholder="page number"
       ></input>
@@ -63,9 +68,9 @@ const PageRequestForm = () => {
   ) : (
     <div>
       <StyledUl>{editForms}</StyledUl>
-      <NavLink exact to={`/Page${value}`}>
+      <button type="button" onClick={handleClick}>
         Finished Editing
-      </NavLink>
+      </button>
     </div>
   );
 };

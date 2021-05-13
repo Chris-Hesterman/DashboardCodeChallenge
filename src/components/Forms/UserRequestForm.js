@@ -24,7 +24,7 @@ const UserRequestForm = ({ user_id }) => {
     }
   };
 
-  const onChange = (e) => {
+  const handleChange = (e) => {
     setValue(e.target.value);
   };
 
@@ -52,7 +52,7 @@ const UserRequestForm = ({ user_id }) => {
       <input
         type="number"
         value={value}
-        onChange={onChange}
+        onChange={handleChange}
         id="user"
         placeholder="user_id"
       ></input>
@@ -61,7 +61,7 @@ const UserRequestForm = ({ user_id }) => {
   ) : (
     <div>
       <StyledUl>{editForms}</StyledUl>
-      <NavLink exact to={`/Page${value}`}>
+      <NavLink exact to={`/Page1`}>
         Finished Editing
       </NavLink>
     </div>

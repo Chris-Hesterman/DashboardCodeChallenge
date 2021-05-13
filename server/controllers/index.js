@@ -35,13 +35,13 @@ const controllers = {
     },
     put: (req, res) => {
       const { question_id } = req.params;
-      const { body } = req.body;
-
+      const { question, answer } = req.body;
+      console.log(req.body);
       pgdb
-        .updateData(body.question, body.answer, question_id, 'question')
+        .updateData(question, answer, question_id, 'question')
         .then((results) => {
           console.log(`question ${results.question_id} was updated`);
-          res.status(200).send(`question ${results.question_id} was updated`);
+          res.send('Question updated');
         })
         .catch((err) => {
           res.status(500).send(err);
@@ -49,10 +49,10 @@ const controllers = {
     },
     post: (req, res) => {
       const { page_id } = req.params;
-      const { body } = req.body;
+      const { question, answer } = req.body;
 
       pgdb
-        .addData(body.question, body.answer, page_id, 'question')
+        .addData(question, answer, page_id, 'question')
         .then((result) => {
           res.status(202).send('question was added to database');
         })

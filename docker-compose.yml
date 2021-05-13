@@ -10,7 +10,7 @@ services:
       - app-network
   server:
     container_name: server
-    image: chrish14/dash_server:v2
+    image: chrish14/dash_server
     working_dir: /usr/src/app
     ports:
       - '3001:3001'
