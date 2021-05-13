@@ -5,7 +5,7 @@ const UserEditForm = ({ usernameStr, pwdStr, user_id }) => {
   const [username, setUsername] = useState(usernameStr);
   const [pwd, setPwd] = useState(pwdStr);
 
-  const onChange = (e) => {
+  const handleChange = (e) => {
     if (e.target.id === 'username') {
       setUsername(e.target.value);
     } else setPwd(e.target.value);
@@ -24,7 +24,7 @@ const UserEditForm = ({ usernameStr, pwdStr, user_id }) => {
             type="text"
             name="username"
             value={username}
-            onChange={onChange}
+            onChange={handleChange}
             id="username"
             size="60"
           ></input>
@@ -34,7 +34,7 @@ const UserEditForm = ({ usernameStr, pwdStr, user_id }) => {
             type="text"
             name="pwd"
             value={pwd}
-            onChange={onChange}
+            onChange={handleChange}
             id="pwd"
           ></input>
         </div>

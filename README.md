@@ -7,6 +7,7 @@
 ## Requirements
 
 - Must have Docker installed on host machine.
+- Be sure local project has .env file with appropriate variables
 
 ## Usage
 
@@ -24,11 +25,13 @@
 5. Page number entered in dashboard input retrieves all questions for that page from the postgres db
 6. Question editor is pre filled with questions and answers to be edited.
 7. Once edited, hitting return or 'submit' button sends the edited question back to update the database via 'PUT' request to server.
+8. Questions can also be deleted.
+9. Once finished editing, clicking 'Finished Editing' button refreshes page, fetches the revised dataset for the app.
 
 ## What was left out
 
 - CRUD functionality for user management - mostly implemented but untested on back end
-- POST and DELETE for questions - mostly implemented but untested in back end
+- POST for questions - mostl implemented but untested in back end. Not yet implemented on front end.
 - Other features for the dashboard - time ultimately became an issue
 - Testing - would have included with more time. I can write tests, but it is a skill I need to keep working on.
 
@@ -67,8 +70,9 @@
 
 ## Areas for improvement
 
-- Testing. I would have used Jest/react-testing-library for front end, Jest/enzyme/supertest for back end.
-- Finish CRUD for users and questions
+- Testing. Judging by how quickly this project grew in complexity, testing while developing would likely have been a better approach. Need to implement TDD for future projects. I would have used Jest/react-testing-library for front end, Jest/enzyme/supertest for back end.
+- Finish CRUD for users and 'C' in CRUD for questions
 - Implement filters for retrieving user data
 - Would have liked to finish and do some load testing and optimization. I would have used K6 for that locally, possibly looking at New Relic as well.
 - Would have liked to implement exporting data (via CSV file), using Node and the npm module 'csv-stream-writer'
+- Of course making it all look nicer would be great but that was not the focus of this project.

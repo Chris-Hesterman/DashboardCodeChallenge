@@ -14,7 +14,7 @@ const controllers = {
       pgdb
         .getData(page_id, 'question')
         .then((results) => {
-          // console.log(results);
+          console.log(results);
           results = results.reduce((acc, result) => {
             const page = result.page_id;
             if (acc[page - 1]) {
