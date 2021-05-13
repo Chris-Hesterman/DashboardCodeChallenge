@@ -1,9 +1,9 @@
 const pool = require('../database/index.js');
 
-const getQuestionsAllStr = `SELECT * FROM questions`;
-const getQuestionsStr = `SELECT * FROM questions WHERE page_id = $1`;
+const getQuestionsAllStr = `SELECT * FROM questions ORDER BY question_id ASC`;
+const getQuestionsStr = `SELECT * FROM questions WHERE page_id = $1 ORDER BY question_id ASC`;
 const getUserStr = `SELECT * FROM users WHERE user_id = $1`;
-const getUsersAllStr = `SELECT * FROM users`;
+const getUsersAllStr = `SELECT * FROM users ORDER BY user_id ASC`;
 const updateQuestionStr = `UPDATE questions SET question = $1, answer = $2 WHERE question_id = $3 RETURNING question_id`;
 const updateUserStr = `UPDATE users SET username = $1, password = $2 WHERE user_id = $3 RETURNING user_id`;
 const addQuestionStr = `INSERT INTO questions (question, answer, page_id) VALUES($1, $2, $3) RETURNING question_id`;
@@ -47,7 +47,7 @@ const updateData = (value1, value2, numberId, type) => {
   }
 
   return pool
-    .query(queryString, [value1, value2, numberId])
+    .query(queryString, [value1, value2, +numberId])
     .then((result) => {
       return result.rows[0];
     })
@@ -60,7 +60,7 @@ const addData = (field1, field2, numberId, type) => {
 
   if (type === 'question') {
     queryString = addQuestionStr;
-    paramsArray = [field1, field2, numberId];
+    paramsArray = [field1, field2, +numberId];
   }
 
   return pool
@@ -80,7 +80,7 @@ const deleteData = (numberId, type) => {
     queryString = deleteQuestionStr;
   }
 
-  return pool.query(queryString, [numberId]);
+  return pool.query(queryString, [+numberId]);
 };
 
 module.exports.getData = getData;

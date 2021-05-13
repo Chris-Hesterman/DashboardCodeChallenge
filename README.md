@@ -1,70 +1,74 @@
-# Getting Started with Create React App
+# Carna Take Home Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- This project was done to allow Carna to assess my coding ability.
+- Is it perfect? Definitely not. It is a work in progress.
+- It should run on any computer meeting the requirements
 
-## Available Scripts
+## Requirements
 
-In the project directory, you can run:
+- Must have Docker installed on host machine.
 
-### `npm start`
+## Usage
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Navigate to project root folder
+- Be sure Docker is running
+- From the terminal: docker compose up
+- In browser: navigate to http://127.0.0.1:3001
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## What you can expect of the current version
 
-### `npm test`
+1. 4 client screens plus dashboard screen
+2. Answering questions on pages 1 and 2 correctly will be indicated by the client
+3. Functionality for pages 3 and 4 is not implemented yet. (matching words with correct translation)
+4. Simple navigation in side bar is handled by React Router
+5. Page number entered in dashboard input retrieves all questions for that page from the postgres db
+6. Question editor is pre filled with questions and answers to be edited.
+7. Once edited, hitting return or 'submit' button sends the edited question back to update the database via 'PUT' request to server.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## What was left out
 
-### `npm run build`
+- CRUD functionality for user management - mostly implemented but untested on back end
+- POST and DELETE for questions - mostly implemented but untested in back end
+- Other features for the dashboard - time ultimately became an issue
+- Testing - would have included with more time. I can write tests, but it is a skill I need to keep working on.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Technology choices
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. React was chosen as the front end technology for a number of reasons
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- client side routing made easy
+- component structure
+- quick setup with create-react-app
+- hooks
+- styled-components keep css modular
+- Preferred in project specifications
+- overall familiarity
 
-### `npm run eject`
+2. Node and Express
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Previous experience integrating with various databases
+- Express simplifies setting up server/routes
+- Preferred in project specifications
+- Familiarity
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3. Postgres
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- Preferred in project specifications
+- Familiarity
+- Great community/docs
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+4. Docker
 
-## Learn More
+- Specifications called for starting app with one command
+- I took this to mean build/seed database, npm install, npm run build in an automated way
+- Docker allows most of that to be done ahead and saved as images.
+- With Docker compose, can simply run 'docker compose up' and Docker will fetch the necessary images from Docker Hub, set them up to communicate and get them running. All you need to do then is navigate to the appropriate URL in your browser.
+- I had not use Docker before and it did take significant time to work out the bugs and get it to do exactly what I needed.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Areas for improvement
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Testing. I would have used Jest/react-testing-library for front end, Jest/enzyme/supertest for back end.
+- Finish CRUD for users and questions
+- Implement filters for retrieving user data
+- Would have liked to finish and do some load testing and optimization. I would have used K6 for that locally, possibly looking at New Relic as well.
+- Would have liked to implement exporting data (via CSV file), using Node and the npm module 'csv-stream-writer'

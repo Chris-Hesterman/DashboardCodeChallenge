@@ -24,7 +24,13 @@ const QuestionEditForm = ({
 
   const onSubmit = (e) => {
     e.preventDefault();
-    updateData(questionNumber, question, answer, 'question');
+    updateData(questionNumber, question, answer, 'question')
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (

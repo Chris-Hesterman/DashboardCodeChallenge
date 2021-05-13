@@ -16,8 +16,20 @@ export const fetchData = async (req_id, type) => {
   }
 };
 
-export const updateData = async (req_id, field1, field2, type) => {
+export const updateData = async (req_id, field1, field2) => {
   axios.defaults.baseURL = 'http://127.0.0.1:3001';
+  const queryString = `/questions/${req_id}`;
+  console.log('got this far');
+  try {
+    const response = await axios.put(queryString, {
+      question: field1,
+      answer: field2
+    });
+
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const generateWordBoxes = (array) => {

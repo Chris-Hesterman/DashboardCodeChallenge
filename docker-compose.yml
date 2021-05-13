@@ -3,14 +3,14 @@ version: '3.8'
 services:
   database:
     container_name: database
-    image: chrish14/dash_db
+    build: server/database
     ports:
       - '5432:5432'
     networks:
       - app-network
   server:
     container_name: server
-    image: chrish14/dash_server:v2
+    build: ./
     working_dir: /usr/src/app
     ports:
       - '3001:3001'
@@ -23,6 +23,8 @@ services:
     networks:
       - app-network
     entrypoint: ['npm', 'run', 'server']
+    volumes:
+      - ./:/usr/src/app
     depends_on:
       - database
 networks:
