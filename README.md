@@ -70,7 +70,7 @@
 
 ## Areas for improvement
 
-- Testing. Judging by how quickly this project grew in complexity, testing while developing would likely have been a better approach. Need to implement TDD for future projects. I would have used Jest/react-testing-library for front end, Jest/enzyme/supertest for back end.
+- Testing. Judging by how quickly this project grew in complexity, testing while developing would likely have been a better approach. Need to implement TDD for future projects. I would have used Jest/react-testing-library for front end, Jest/supertest for back end.
 - Finish CRUD for users and 'C' in CRUD for questions
 - Implement filters for retrieving user data
 - Would have liked to finish and do some load testing and optimization. I would have used K6 for that locally, possibly looking at New Relic as well.
