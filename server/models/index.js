@@ -66,7 +66,7 @@ const addData = (field1, field2, numberId, type) => {
   return pool
     .query(queryString, paramsArray)
     .then((result) => {
-      return result;
+      return result.rows;
     })
     .catch((err) => {
       console.log(err);
@@ -80,7 +80,9 @@ const deleteData = (numberId, type) => {
     queryString = deleteQuestionStr;
   }
 
-  return pool.query(queryString, [+numberId]);
+  return pool.query(queryString, [+numberId]).then((result) => {
+    return result.rows[0];
+  });
 };
 
 module.exports.getData = getData;
