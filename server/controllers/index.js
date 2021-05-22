@@ -51,7 +51,8 @@ const controllers = {
       pgdb
         .addData(question, answer, page_id, 'question')
         .then((result) => {
-          res.status(201).send('question was added to database');
+          const resultString = `question was added to database with question_id ${result[0].question_id}`;
+          res.status(201).send(resultString);
         })
         .catch((err) => {
           console.log(err);
@@ -64,7 +65,9 @@ const controllers = {
       pgdb
         .deleteData(question_id, 'question')
         .then((result) => {
-          res.status(200).send(`Question ${question_id} was deleted`);
+          res
+            .status(200)
+            .send(`Deleted question with id of ${result.question_id}`);
         })
         .catch((err) => {
           console.log(err);

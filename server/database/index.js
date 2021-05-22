@@ -1,4 +1,5 @@
-require('dotenv').config();
+require('custom-env').env('testing'); //comment out when not testing
+// require('custom-env').env();       //coment out when testing
 const { Pool } = require('pg');
 
 const pool = new Pool({
