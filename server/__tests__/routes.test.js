@@ -115,12 +115,12 @@ describe('POST /questions/page_id', () => {
 describe('DELETE /questions/question_id', () => {
   it('should successfully delete question with given id from database', () => {
     return request(app)
-      .delete('/questions/5')
+      .delete('/questions/3')
       .then((response) => {
         expect(response.statusCode).toBe(200);
         expect(typeof +response.text.split(' ').pop()).toBe('number');
         expect(response.text.split(' ').slice(0, -1).join(' ')).toBe(
-          'delete question with id of'
+          'Deleted question with id of'
         );
       });
   });

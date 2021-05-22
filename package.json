@@ -27,10 +27,10 @@
     "build": "react-scripts build",
     "server": "nodemon server/server.js",
     "test": "react-scripts test",
-    "testServer": " jest server/__tests__/ --watch",
+    "testServer": "jest server/__tests__/ --watch --collectCoverage",
     "eject": "react-scripts eject",
     "watch": "npm-watch",
-    "TestDB": "docker build -t database ./server/database && docker run -p 5432:5432 database:latest"
+    "TestDB": "docker container rm -f test && docker image rm database:latest && docker build -t database ./server/database && docker run --name test -p 5432:5432 -t database:latest"
   },
   "eslintConfig": {
     "extends": [
